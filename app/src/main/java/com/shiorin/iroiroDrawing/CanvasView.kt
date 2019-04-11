@@ -80,8 +80,9 @@ CanvasView @JvmOverloads constructor(
 
                 }
             }
-            return true
-        }?: return true
+
+        }
+        return true
     }
 
     fun allDelete() {
