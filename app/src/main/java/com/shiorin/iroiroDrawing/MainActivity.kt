@@ -45,7 +45,7 @@ open class MainActivity : AppCompatActivity() {
     private lateinit var previewRequest: CaptureRequest
     private lateinit var captureSession: CameraCaptureSession
     private lateinit var cv: CanvasView
-    private lateinit  var bitmap: Bitmap
+    private lateinit var bitmap: Bitmap
     private var pixel: Int = 0
 
     private lateinit var rootView: SurfaceView
@@ -126,7 +126,7 @@ open class MainActivity : AppCompatActivity() {
     private fun createCameraPreviewSession() {
         try {
             val texture = textureView.surfaceTexture
-           texture.setDefaultBufferSize(previewSize.width, previewSize.height)
+            texture.setDefaultBufferSize(previewSize.width, previewSize.height)
             val surface = Surface(texture)
             previewRequestBuilder = cameraDevice!!.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW)
             previewRequestBuilder.addTarget(surface)
@@ -240,10 +240,9 @@ open class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun onShutter() {
-        var appDir   = File(getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS),"cameraPreview")
-        
+        var appDir = File(getExternalStoragePublicDirectory(DIRECTORY_DOCUMENTS), "cameraPreview")
+
         if (!appDir.exists()) {
             appDir.mkdirs()
         }
@@ -280,22 +279,22 @@ open class MainActivity : AppCompatActivity() {
         captureSession.setRepeatingRequest(previewRequest, null, null)
     }
 
-    fun UpdateColor()  {
-        val colorR =pixel and 0xff0000 shr 16
+    fun UpdateColor() {
+        val colorR = pixel and 0xff0000 shr 16
         val colorG = pixel and 0xff00 shr 8
         val colorB = pixel and 0xff
         Log.e("color", "R:$colorR,G:$colorG,B:$colorB")
 
-        cv.setColor(colorR,colorG,colorB)
+        cv.setColor(colorR, colorG, colorB)
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         event?.let {
             when (it.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    Log.e("touch","x:${it.x},y:${it.y}")
+                    Log.e("touch", "x:${it.x},y:${it.y}")
                     onShutter()
-                    pixel = bitmap.getPixel(it.x.toInt(), it.y.toInt()-250)
+                    pixel = bitmap.getPixel(it.x.toInt(), it.y.toInt() - 250)
                     UpdateColor()
                 }
                 MotionEvent.ACTION_MOVE -> {
@@ -312,8 +311,6 @@ open class MainActivity : AppCompatActivity() {
             return true
         } ?: return true
     }
-
-
 
 
 }
