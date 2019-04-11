@@ -41,23 +41,18 @@ CanvasView @JvmOverloads constructor(
         }
     }
 
-
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-
-//        val view = DrawLine(Path(), Paint()) //ここで
 
         for (line in this.lines) {
             line.draw(canvas)
         }
 
-        // Log.e("path","$pathList")
         pathList.forEach {
         }
         canvas?.drawPath(drawingPath, paint)
     }
-
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         event?.let {
@@ -71,8 +66,6 @@ CanvasView @JvmOverloads constructor(
                 }
                 MotionEvent.ACTION_UP ->{
                     this.drawingPath.lineTo(it.x,it.y)
-                   // pathList.add(linePath)
-                   // pathList.add(DrawLine(this.drawingPath,this.paint))
                     this.lines.add(DrawLine(this.drawingPath,this.paint))
                    this.drawingPath.reset()
                 }
@@ -80,7 +73,6 @@ CanvasView @JvmOverloads constructor(
 
                 }
             }
-
         }
         return true
     }
@@ -97,7 +89,4 @@ CanvasView @JvmOverloads constructor(
         paint.setARGB(255,R,G,B)
         Log.e("Color","R:$R,G:$G,B:$B")
     }
-
-
-
 }
